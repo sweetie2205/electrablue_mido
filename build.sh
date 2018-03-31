@@ -31,10 +31,11 @@ echo -e "***********************************************$nocol"
 LC_ALL=C date +%Y-%m-%d
 kernel_dir=$PWD
 build=$kernel_dir/out
-export CROSS_COMPILE="/home/lordarcadius/aarch64-linaro-linux-android/bin/aarch64-linaro-linux-android-"
+export CROSS_COMPILE="/home/vipul/kernels/toolchains/aarch64-linaro-linux-android/bin/aarch64-linaro-linux-android-"
 kernel="ElectraBlue"
-version="7.0"
+version="11.0"
 vendor="xiaomi"
+android="TREBLE"
 device="mido"
 zip=zip
 date=`date +"%Y%m%d-%H%M"`
@@ -43,9 +44,9 @@ kerneltype="Image.gz-dtb"
 jobcount="-j$(grep -c ^processor /proc/cpuinfo)"
 #modules_dir=$kernel_dir/"$zip"/system/lib/modules
 modules_dir=$kernel_dir/"$zip"/modules
-zip_name="$kernel"-"$version"-"$date"-"$device".zip
-export KBUILD_BUILD_USER=LordArcadius
-export KBUILD_BUILD_HOST=DroidBox
+zip_name="$kernel"-"$version"-"$date"-"$android"-"$device".zip
+export KBUILD_BUILD_USER=vipul
+export KBUILD_BUILD_HOST=lordarcadius
 
 echo "Checking for build..."
 if [ -d arch/arm64/boot/"$kerneltype" ]; then
@@ -127,10 +128,6 @@ if [ -f "$zip"/"$kerneltype" ]; then
 	rm "$kerneltype"
 	cd ..
 	rm -rf arch/arm64/boot/"$kerneltype"
-	echo "Generating changelog..."
-        git --no-pager log --pretty=oneline --abbrev-commit 63940662c5bd707159770d06b4db10f6ee8b73af..HEAD > zip/changelog.txt
-        paste zip/changelog.txt
-        #rm zip/changelog.txt
 	export outdir=""$build""
         export out=""$build""
         export OUT=""$build""

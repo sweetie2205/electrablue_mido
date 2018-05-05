@@ -25,28 +25,28 @@ White='\e[0;37m'        # White
 
 
 echo -e "$White***********************************************"
-echo "         Compiling ElectraBlue Kernel             "
+echo "         Compiling Kernel             "
 echo -e "***********************************************$nocol"
 
 LC_ALL=C date +%Y-%m-%d
 kernel_dir=$PWD
 build=$kernel_dir/out
-export CROSS_COMPILE="/home/vipul/kernels/toolchains/aarch64-linux-android/bin/aarch64-opt-linux-android-"
-kernel="ElectraBlue"
-version="11.0"
-vendor="xiaomi"
+export CROSS_COMPILE="/home/rajangohil99/agcc-linaro-aarch64-linux-gnu-4.8-2013.07-1_linux/bin/aarch64-linux-gnu-"
+kernel="Cheesie"
+version="1.0"
+vendor="motorola"
 android="OREO"
-device="mido"
+device="kinzie"
 zip=zip
 date=`date +"%Y%m%d-%H%M"`
-config=mido_defconfig
+config=kinzie_defconfig
 kerneltype="Image.gz-dtb"
 jobcount="-j$(grep -c ^processor /proc/cpuinfo)"
 #modules_dir=$kernel_dir/"$zip"/system/lib/modules
 modules_dir=$kernel_dir/"$zip"/modules
 zip_name="$kernel"-"$version"-"$date"-"$android"-"$device".zip
-export KBUILD_BUILD_USER=vipul
-export KBUILD_BUILD_HOST=lordarcadius
+export KBUILD_BUILD_USER=rajan
+export KBUILD_BUILD_HOST=sweetie
 
 echo "Checking for build..."
 if [ -d arch/arm64/boot/"$kerneltype" ]; then
